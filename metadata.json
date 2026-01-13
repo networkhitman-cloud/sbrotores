@@ -1,0 +1,8 @@
+
+{
+  "name": "Parchi Manager Pro",
+  "description": "A high-performance billing and payment tracking dashboard for business transactions, featuring AI-powered entry parsing, real-time status tracking, and multi-device responsiveness.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
