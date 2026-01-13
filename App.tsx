@@ -152,15 +152,21 @@ const App: React.FC = () => {
       />
 
       <main className="flex-1 flex flex-col h-full overflow-hidden relative">
-        <header className="bg-white border-b px-4 lg:px-8 py-4 flex items-center justify-between sticky top-0 z-30 shadow-sm">
+        {/* Print Header */}
+        <div className="hidden print:block mb-8 text-center">
+            <h1 className="text-3xl font-black text-slate-900 uppercase">Parchi Manager Report</h1>
+            <p className="text-slate-500 mt-2 font-bold">{view === 'dashboard' ? 'Overview' : view} &bull; {new Date().toLocaleDateString()}</p>
+        </div>
+
+        <header className="no-print bg-white/70 glass border-b px-4 lg:px-8 py-4 flex items-center justify-between sticky top-0 z-30 shadow-sm">
           <div className="flex items-center gap-4">
             <button
               onClick={() => setIsSidebarOpen(true)}
-              className="lg:hidden p-2 hover:bg-slate-100 rounded-lg"
+              className="lg:hidden p-2 hover:bg-slate-100 rounded-lg transition-colors"
             >
               <MenuIcon />
             </button>
-            <h1 className="text-xl lg:text-2xl font-bold text-slate-800 capitalize">
+            <h1 className="text-xl lg:text-2xl font-black text-slate-800 tracking-tight uppercase">
               {view === 'dashboard' ? 'Executive Summary' : view}
             </h1>
           </div>
@@ -170,20 +176,20 @@ const App: React.FC = () => {
               <select
                 value={monthFilter}
                 onChange={(e) => setMonthFilter(e.target.value)}
-                className="bg-slate-50 border rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                className="bg-slate-50 border rounded-xl px-3 py-2 text-sm font-semibold focus:ring-4 focus:ring-blue-100 outline-none transition-all cursor-pointer"
               >
-                <option value="all">All Time</option>
-                <option value="current">This Month</option>
-                <option value="last">Last Month</option>
+                <option value="all">All Records</option>
+                <option value="current">Current Month</option>
+                <option value="last">Previous Month</option>
               </select>
             )}
             <GeminiAssistant onEntryParsed={handleAddEntry} />
             <button
               onClick={() => window.print()}
-              className="hidden sm:flex items-center gap-2 bg-slate-800 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-slate-700 transition-colors"
+              className="hidden sm:flex items-center gap-2 bg-slate-900 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-slate-800 hover:-translate-y-0.5 transition-all shadow-lg shadow-slate-200"
             >
               <PrintIcon />
-              <span>Print</span>
+              <span>Print Report</span>
             </button>
           </div>
         </header>
@@ -243,7 +249,7 @@ const App: React.FC = () => {
       {/* Mobile Floating Action Button */}
       <button
         onClick={() => { setEditingEntry(null); setShowEntryModal(true); }}
-        className="lg:hidden fixed bottom-6 right-6 w-14 h-14 bg-blue-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-blue-700 transition-transform active:scale-90 z-40"
+        className="no-print lg:hidden fixed bottom-6 right-6 w-14 h-14 bg-blue-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-blue-700 hover:scale-110 active:scale-95 transition-all z-40"
       >
         <PlusIcon />
       </button>
@@ -259,7 +265,7 @@ const PlusIcon = () => (
   <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></svg>
 );
 const PrintIcon = () => (
-  <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z" /></svg>
+  <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z" /></svg>
 );
 
 export default App;
